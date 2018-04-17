@@ -2,3 +2,6 @@
 *.DS_Store*
 *evolutionary-roommates.iml*
 out*
+/bin/
+.classpath
+.project

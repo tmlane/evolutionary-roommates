@@ -5,7 +5,7 @@ public class Matches {
     Population[] matches = new Population[SIZE];
     public Matches()
     {
-        for(int i=0;i<SIZE;i++)
+        for(int i=0;i<1;i++)
         {
             matches[i] = new Population();
         }
