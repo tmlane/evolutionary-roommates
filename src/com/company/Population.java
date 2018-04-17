@@ -33,8 +33,10 @@ public class Population {
       for(int i = 0; i< pairSize; i++)
   {
       pair[i] = calcFitness(students[pairs[i][0]],students[pairs[i][1]]);
+      System.out.println("Compatability score of Pair " + (i+1) + " " + pair[i]);
       popDiff += pair[i];
   }
+  popDiff = popDiff/pairSize;
   System.out.println(popDiff);
   }
 
@@ -47,8 +49,12 @@ public class Population {
       {
           double x = s1.answers[i] - s2.answers[i];
           double diff = Math.abs(x);
+          diff = diff/5; //sloppy way of taking percentage, will add parameters when questions might have different wweight/mmore than 5 answers
+          System.out.println("Q" + (i+1) + " Compatability: " +diff);
            sumDiff += diff;
       }
+      sumDiff = sumDiff/4;
+
       return sumDiff;
   }
 
