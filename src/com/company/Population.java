@@ -6,7 +6,7 @@ public class Population {
   int[][] pairs = new int[SIZE/2][2];
   //SIZE/2 could cause problems, added extra variable just to be safe
   int pairSize = SIZE/2;
-    double pair[] = new double[pairSize];
+  double pair[] = new double[pairSize];
 
 
     //for initial population
@@ -58,7 +58,7 @@ public class Population {
       return sumDiff;
   }
 
-
+//mutation switches a few indexes in partners
 
 
 
