@@ -37,7 +37,7 @@ public class Student {
 		this.answers[1] = hmap.get("Q2");
 		this.answers[2] = hmap.get("Q3");
 		this.answers[3] = hmap.get("Q4");
-	} // not entirely sure why we need the q1 hash map
+	}
 
 	public void printInfo() {
 		System.out.println("Name: " + this.Name + "ID: " + this.ID);

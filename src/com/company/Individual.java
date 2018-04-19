@@ -16,9 +16,12 @@ public class Individual {
 
 	public Individual(int roommateCount) {
 		size = roommateCount;
-		pairings = new int[size];
+		pairings = new int[size]; //note to Trevor: becuase using single arrays instead of 2d arrays
 		for (int i = 0; i < size; i++) {
-			pairings[i] = randomBetween(1,5);
+			pairings[i] = i;
+		}
+		for(int i =0;i<5;i++) {
+			mutate();
 		}
 	}
 	
