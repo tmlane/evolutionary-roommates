@@ -1,51 +1,28 @@
 package com.company;
 
 public class Population {
-	final int SIZE = Main.size;
-	Student[] students = new Student[SIZE];
+	Individual[] individuals;
 
-	//for initial population
-	//initial population
-	public Population()
-	{
-		for(int i = 0; i<SIZE;i++)
-		{
-			students[i] = new Student();
+	public Population(int individualCount) {
+		individuals = new Individual[individualCount];
+		for (int i = 0; i < individualCount; i++) {
+			individuals[i] = new Individual(10);
+			System.out.println(individuals[i]);
+			//System.out.println(individuals[i].calculateTotalFitness());
 		}
-
-
-		//popDiff is total compatability difference
-		double popDiff = 0;
-		for (int i = 0; i < SIZE; i+=2){
-			double diff = calcFitness(students[i],students[i+1]);
-			popDiff =+ diff;
-			System.out.println("Compatability score of Pair " + (i+1) + " " + diff +"\n");
-		}
-		popDiff /= (SIZE/2);
-		System.out.println(popDiff);
+		System.out.println("Average Fitness: " + calculateTotalFitnesss());
 	}
 
-
-	public double calcFitness(Student s1, Student s2)
-	{
-		//calculate total distance
-		double sumDiff = 0;
-		for(int i=0;i< s1.answers.length;i++)
-		{
-			double x = s1.answers[i] - s2.answers[i];
-			double diff = Math.abs(x);
-			diff = diff/5; //sloppy way of taking percentage, will add parameters when questions might have different weight/more than 5 answers
-			//System.out.println(s1.answers[i] +"   "+  s2.answers[i] );
-			//System.out.println("Q" + (i+1) + " Compatability: " + (1-diff));
-			sumDiff += 1-diff;
+	public double calculateTotalFitnesss() {
+		double total = 0;
+		for (int i = 0; i < individuals.length; i++) {
+			total += individuals[i].calculateTotalFitness();
 		}
-		sumDiff = sumDiff/4;
-
-		return sumDiff;
+		return total;
 	}
 
-	//mutation switches a few indexes in partners
-
-
+	public double calculateAverageFitness() {
+		return calculateTotalFitnesss() / individuals.length;
+	}
 
 }
