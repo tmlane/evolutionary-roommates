@@ -7,9 +7,14 @@ public class Population {
 		individuals = new Individual[individualCount];
 		for (int i = 0; i < individualCount; i++) {
 			individuals[i] = new Individual(10);
-			System.out.println(individuals[i]);
+			//System.out.println(individuals[i]);
 			//System.out.println(individuals[i].calculateTotalFitness());
 		}
+		sortByFitness();
+		for (int i = 0; i < individualCount; i++) {
+			System.out.println(individuals[i]);
+		}
+
 		System.out.println("Average Fitness: " + calculateTotalFitnesss());
 	}
 
@@ -24,5 +29,32 @@ public class Population {
 	public double calculateAverageFitness() {
 		return calculateTotalFitnesss() / individuals.length;
 	}
+
+	//create method to sort individuals by fitness
+	public void sortByFitness()
+	{
+		boolean swapped = true;
+		int j = 0;
+		Individual tmp;
+		while (swapped)
+		{
+			swapped = false;
+			j++;
+			for(int i = 0; i < individuals.length - j; i++)
+			{
+				if(individuals[i].calculateTotalFitness() < individuals[i+1].calculateTotalFitness())
+				{
+					tmp = individuals[i];
+					individuals[i] = individuals[i+1];
+					individuals[i+1] = tmp;
+					swapped = true;
+				}
+			}
+		}
+	}
+
+
+
+	//create method to assign linear ranking selection probability
 
 }
