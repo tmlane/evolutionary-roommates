@@ -10,12 +10,8 @@ public class Population {
 			//System.out.println(individuals[i]);
 			//System.out.println(individuals[i].calculateTotalFitness());
 		}
-		sortByFitness();
-		for (int i = 0; i < individualCount; i++) {
-			System.out.println(individuals[i]);
-		}
-
-		System.out.println("Average Fitness: " + calculateAverageFitness());
+		//sortByFitness(); // We don't want to sort by fitness until after mutation
+		System.out.println(this);
 	}
 
 	public double calculateTotalFitnesss() {
@@ -24,6 +20,15 @@ public class Population {
 			total += individuals[i].calculateTotalFitness();
 		}
 		return total;
+	}
+	
+	public String toString(){
+		String answer = "";
+		for (int i = 0; i < individuals.length; i++) {
+			answer += individuals[i] + "\n";
+		}
+		answer += "Average Fitness: " + calculateAverageFitness();
+		return answer;
 	}
 
 	public double calculateAverageFitness() {

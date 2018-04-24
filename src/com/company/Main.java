@@ -11,6 +11,8 @@ public class Main {
 		System.out.println(i);
 		*/
 		Population pop = new Population(5);
+		pop.sortByFitness();
+		System.out.println(pop);
 
 		// Matches matches = new Matches();
 	}
