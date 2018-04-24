@@ -15,7 +15,7 @@ public class Population {
 			System.out.println(individuals[i]);
 		}
 
-		System.out.println("Average Fitness: " + calculateTotalFitnesss());
+		System.out.println("Average Fitness: " + calculateAverageFitness());
 	}
 
 	public double calculateTotalFitnesss() {
