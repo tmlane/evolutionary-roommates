@@ -20,6 +20,7 @@ public class Individual {
 		for (int i = 0; i < size; i++) {
 			pairings[i] = i;
 		}
+		// Mutates to create the individual
 		for(int i =0;i<5;i++) {
 			mutate();
 		}
@@ -45,10 +46,11 @@ public class Individual {
 
 	public double calcRoommateCompatibility(Student s1, Student s2) {
 		double compatibility = 0;
-		for (int i = 0; i < s1.answers.length; i++) {
+		int numQuestions = s1.answers.length;
+		for (int i = 0; i < numQuestions; i++) {
 			double x = s1.answers[i] - s2.answers[i];
 			double diff = Math.abs(x);
-			diff = diff / 5; // five is the current max of any question
+			diff = diff / 4; // four is the max difference in any question
 			// sloppy way of taking percentage, will add
 			// parameters when questions might have
 			// different weight/more than 5 answers
@@ -56,18 +58,21 @@ public class Individual {
 			// System.out.println("Q" + (i+1) + " Compatability: " + (1-diff));
 			compatibility += 1 - diff;
 		}
-		double averageCompatibility = compatibility / s1.answers.length; // length the number of questions
+		double averageCompatibility = compatibility / numQuestions; // length the number of questions
 		return averageCompatibility;
 	}
 
 	// mutation switches a two random people
 	public void mutate(){
-		int spot1 = randomBetween(0, size - 1);
-		int spot2 = randomBetween(0, size - 1);
-
-		int temp = pairings[spot1];
-		pairings[spot1] = pairings[spot2];
-		pairings[spot2] = temp;
+		double mutationProbability = .1;
+		if (Math.random() > 1-mutationProbability){
+			int spot1 = randomBetween(0, size - 1);
+			int spot2 = randomBetween(0, size - 1);
+	
+			int temp = pairings[spot1];
+			pairings[spot1] = pairings[spot2];
+			pairings[spot2] = temp;
+		}
 	}
 	
 	// Generates a random number between min and max inclusive

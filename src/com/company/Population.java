@@ -6,12 +6,28 @@ public class Population {
 	public Population(int individualCount) {
 		individuals = new Individual[individualCount];
 		for (int i = 0; i < individualCount; i++) {
-			individuals[i] = new Individual(10);
+			individuals[i] = new Individual(Main.size);
 			//System.out.println(individuals[i]);
 			//System.out.println(individuals[i].calculateTotalFitness());
 		}
 		//sortByFitness(); // We don't want to sort by fitness until after mutation
-		System.out.println(this);
+		//System.out.println(this);
+	}
+	
+	public Individual selectParent(){
+		double probability = Math.random();
+		double fitnessSum = 0;
+		for(int i = 0; i < individuals.length; i++){
+			fitnessSum += fitnessPropScore(i);
+			if (fitnessSum >= probability){
+				return individuals[i];
+			}
+		}
+		throw new UnsupportedOperationException ("Looks like something went wrong with selecting the parent");
+	}
+	
+	public double fitnessPropScore(int individualIndex){
+		return individuals[individualIndex].calculateTotalFitness()/this.calculateTotalFitnesss();
 	}
 
 	public double calculateTotalFitnesss() {
@@ -25,7 +41,7 @@ public class Population {
 	public String toString(){
 		String answer = "";
 		for (int i = 0; i < individuals.length; i++) {
-			answer += individuals[i] + "\n";
+		//	answer += individuals[i] + "\n";
 		}
 		answer += "Average Fitness: " + calculateAverageFitness();
 		return answer;
