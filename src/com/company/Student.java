@@ -39,9 +39,28 @@ public class Student {
 		this.answers[3] = hmap.get("Q4");
 	}
 
+	public Student(String[] dataArray)
+	{
+	this.Name = dataArray[0];
+	this.ID = dataArray[1];
+		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
+	hmap.put("Q1",Integer.parseInt(dataArray[2]));
+	hmap.put("Q2",Integer.parseInt(dataArray[3]));
+	hmap.put("Q3",Integer.parseInt(dataArray[4]));
+	hmap.put("Q4",Integer.parseInt(dataArray[5]));
+	this.Answers = hmap;
+	this.answers[0] = hmap.get("Q1");
+	this.answers[1] = hmap.get("Q2");
+	this.answers[2] = hmap.get("Q3");
+	this.answers[3] = hmap.get("Q4");
+
+
+	}
+
 	public void printInfo() {
 		System.out.println("Name: " + this.Name + "ID: " + this.ID);
 		System.out.println("Answers: " + this.Answers);
+
 	}
 
 }
