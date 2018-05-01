@@ -33,6 +33,8 @@ public class Main {
 		
 		for (int i = 0; i < 150; i++){
 			Population nextGen = new Population(POPULATION_SIZE);
+			pop.sortByFitness();
+
 			for (int j = 0; j < POPULATION_SIZE; j++){
 				nextGen.individuals[j] = pop.selectParent();
 				nextGen.individuals[j].mutate();

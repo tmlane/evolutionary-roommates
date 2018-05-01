@@ -50,7 +50,8 @@ public class Individual {
 		for (int i = 0; i < numQuestions; i++) {
 			double x = s1.answers[i] - s2.answers[i];
 			double diff = Math.abs(x);
-			diff = diff / 4; // four is the max difference in any question
+
+			diff = diff / 100; // four is the max difference in any question
 			// sloppy way of taking percentage, will add
 			// parameters when questions might have
 			// different weight/more than 5 answers
