@@ -34,7 +34,7 @@ public class Main {
 		for (int i = 0; i < 150; i++){
 			Population nextGen = new Population(POPULATION_SIZE);
 			for (int j = 0; j < POPULATION_SIZE; j++){
-				nextGen.individuals[j] = pop.individuals[0];//pop.selectParent();
+				nextGen.individuals[j] = pop.selectParent();
 				nextGen.individuals[j].mutate();
 			}
 			System.out.println("Gen " + i + " " + nextGen);

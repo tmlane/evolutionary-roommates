@@ -18,7 +18,8 @@ public class Population {
 		double probability = Math.random();
 		double fitnessSum = 0;
 		for(int i = 0; i < individuals.length; i++){
-			fitnessSum += fitnessPropScore(i);
+			fitnessSum += exponentialRankScore(i);
+			//fitnessSum += fitnessPropScore(i);
 			if (fitnessSum >= probability){
 				return individuals[i];
 			}
@@ -74,6 +75,17 @@ public class Population {
 		}
 	}
 
+	public double exponentialRankScore(int individualIndex){
+// If we don't already have a rank sorted array then make oneif (this.sorted == null) {
+	double exponentialTotalforC = 0;
+// Calculates the sum of rankings for c in this function
+			for (int i = 0; i < individuals.length; i++){exponentialTotalforC += (1 - Math.pow(Math.E,i) );}
+
+		int i = individualIndex;
+		double c = exponentialTotalforC;
+		double score = (1 - Math.pow(Math.E,i) ) / c;
+		return score;
+	}
 
 
 	//create method to assign linear ranking selection probability
