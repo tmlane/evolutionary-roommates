@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Random;
+import java.util.Comparator;
 
 /*
  * An Individual is the set of roommates parents.
@@ -65,7 +66,7 @@ public class Individual {
 
 	// mutation switches a two random people
 	public void mutate(){
-		double mutationProbability = .1;
+		double mutationProbability = 1.0/10.0;
 		if (Math.random() > 1-mutationProbability){
 			int spot1 = randomBetween(0, size - 1);
 			int spot2 = randomBetween(0, size - 1);
@@ -89,5 +90,11 @@ public class Individual {
 		}
 		return result;
 	}
+
+	public static Comparator<Individual> fitnessAscending = new Comparator<Individual>(){
+		public int compare(Individual s1, Individual s2){
+			return Double.compare(s1.calculateTotalFitness(), s2.calculateTotalFitness());
+		}
+	};
 
 }

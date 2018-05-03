@@ -1,16 +1,16 @@
 package com.company;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
 
+
 import java.io.*;
 
 public class Main {
-	public static final int size = 10; // number of students in an individual 
-	public static final Student[] studentsRandom = createRandomStudents(size);
+	public static final int size = 20; // number of students in an individual
+	//public static final Student[] studentsRandom = createRandomStudents(size);
 	public static  Student[] students;
 	public static void main(String[] args) throws IOException {
 
 		try {
-
 			 students = createStudents();
 		}
 		catch (IOException error)
@@ -18,7 +18,7 @@ public class Main {
 			System.out.println(error);
 		}
 
-		int POPULATION_SIZE = 30;
+		int POPULATION_SIZE = 10;
 		
 		/*Individual aa = new Individual(size);
 		System.out.println(aa);
@@ -31,16 +31,22 @@ public class Main {
 		//pop.sortByFitness();
 		//System.out.println(pop.selectParent());
 		
-		for (int i = 0; i < 150; i++){
+		for (int i = 0; i < 10; i++){
 			Population nextGen = new Population(POPULATION_SIZE);
-			pop.sortByFitness();
+			System.out.println("Gen " + i + " " + pop);
+			//pop.sortByFitness();
+			//Arrays.sort(pop.individuals, Individual.fitnessAscending);
+			pop.sortFitnessNew();
 
 			for (int j = 0; j < POPULATION_SIZE; j++){
 				nextGen.individuals[j] = pop.selectParent();
 				nextGen.individuals[j].mutate();
+				nextGen.individuals[j].mutate();
+				nextGen.individuals[j].mutate();
 			}
-			System.out.println("Gen " + i + " " + nextGen);
+			System.out.println("Gen " + i + " " + pop);
 		}
+
 
 	}
 

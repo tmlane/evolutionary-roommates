@@ -1,4 +1,7 @@
 package com.company;
+import com.sun.deploy.util.ArrayUtil;
+
+import java.util.Arrays;
 
 public class Population {
 	Individual[] individuals;
@@ -18,7 +21,8 @@ public class Population {
 		double probability = Math.random();
 		double fitnessSum = 0;
 		for(int i = 0; i < individuals.length; i++){
-			fitnessSum += exponentialRankScore(i);
+			fitnessSum += linearRankScore(i,2);
+			//fitnessSum += exponentialRankScore(i);
 			//fitnessSum += fitnessPropScore(i);
 			if (fitnessSum >= probability){
 				return individuals[i];
@@ -45,11 +49,16 @@ public class Population {
 		//	answer += individuals[i] + "\n";
 		}
 		answer += "Average Fitness: " + calculateAverageFitness();
+		answer += "\t" + individuals[individuals.length-1].calculateTotalFitness();
 		return answer;
 	}
 
 	public double calculateAverageFitness() {
 		return calculateTotalFitnesss() / individuals.length;
+	}
+
+	public void sortFitnessNew(){
+		Arrays.sort(individuals, Individual.fitnessAscending);
 	}
 
 	//create method to sort individuals by fitness
@@ -73,17 +82,31 @@ public class Population {
 				}
 			}
 		}
+
 	}
 
-	public double exponentialRankScore(int individualIndex){
+	public double linearRankScore(int individualIndex, double scale){
+// If we don't already have a rank sorted array then make one
+
+		double s = scale;
+		double mew = individuals.length;
+		int i = individualIndex;
+		double PselLR = (2-s)/mew + (2*i*(s-1))/(mew*(mew-1));
+		return PselLR;
+	}
+
+
+	public double exponentialRankScore(int individualIndex) {
 // If we don't already have a rank sorted array then make oneif (this.sorted == null) {
-	double exponentialTotalforC = 0;
+		double exponentialTotalforC = 0;
 // Calculates the sum of rankings for c in this function
-			for (int i = 0; i < individuals.length; i++){exponentialTotalforC += (1 - Math.pow(Math.E,i) );}
+		for (int i = 0; i < individuals.length; i++) {
+			exponentialTotalforC += (1 - Math.pow(Math.E, i));
+		}
 
 		int i = individualIndex;
 		double c = exponentialTotalforC;
-		double score = (1 - Math.pow(Math.E,i) ) / c;
+		double score = (1 - Math.pow(Math.E, i)) / c;
 		return score;
 	}
 
