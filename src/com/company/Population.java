@@ -2,6 +2,7 @@ package com.company;
 import com.sun.deploy.util.ArrayUtil;
 
 import java.util.Arrays;
+import java.util.Random;
 
 public class Population {
 	Individual[] individuals;
@@ -20,15 +21,26 @@ public class Population {
 	public Individual selectParent(){
 		double probability = Math.random();
 		double fitnessSum = 0;
-		for(int i = 0; i < individuals.length; i++){
+		/*
+		for(int i = 0; i < individuals.length; i++) {
+			System.out.println("indiv:" + i + "rankscore: " + linearRankScore(i, 4));
+		}
+		*/
+		/*for(int i = 0; i < individuals.length; i++){
+
 			fitnessSum += linearRankScore(i,2);
 			//fitnessSum += exponentialRankScore(i);
 			//fitnessSum += fitnessPropScore(i);
+
 			if (fitnessSum >= probability){
+
 				return individuals[i];
 			}
-		}
-		throw new UnsupportedOperationException ("Looks like something went wrong with selecting the parent");
+		}*/
+		int r = new Random().nextInt(5); // between 0 and 4.
+		return individuals[r];
+
+		//throw new UnsupportedOperationException ("Looks like something went wrong with selecting the parent");
 	}
 	
 	public double fitnessPropScore(int individualIndex){
@@ -48,7 +60,7 @@ public class Population {
 		for (int i = 0; i < individuals.length; i++) {
 		//	answer += individuals[i] + "\n";
 		}
-		answer += "Average Fitness: " + calculateAverageFitness();
+		answer += "Average Fitness: \t" + calculateAverageFitness();
 		answer += "\t" + individuals[individuals.length-1].calculateTotalFitness();
 		return answer;
 	}

@@ -66,7 +66,7 @@ public class Individual {
 
 	// mutation switches a two random people
 	public void mutate(){
-		double mutationProbability = 1.0/10.0;
+		double mutationProbability = 1.0/2.0;
 		if (Math.random() > 1-mutationProbability){
 			int spot1 = randomBetween(0, size - 1);
 			int spot2 = randomBetween(0, size - 1);
