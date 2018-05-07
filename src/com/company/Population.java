@@ -17,6 +17,8 @@ public class Population {
 		//sortByFitness(); // We don't want to sort by fitness until after mutation
 		//System.out.println(this);
 	}
+
+
 	
 	public Individual selectParent(){
 		double probability = Math.random();

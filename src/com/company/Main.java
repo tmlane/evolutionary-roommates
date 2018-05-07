@@ -1,11 +1,12 @@
 package com.company;
 import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
+import java.util.Random;
 
 
 import java.io.*;
 
 public class Main {
-	public static  int size = 100; // number of students in an individual
+	public static int size = 50*2; // number of students in an individual
 	//public static final Student[] studentsRandom = createRandomStudents(size);
 	public static  Student[] students;
 	public static void main(String[] args) throws IOException {
@@ -18,7 +19,7 @@ public class Main {
 			System.out.println(error);
 		}
 
-		int POPULATION_SIZE = 30;
+		int POPULATION_SIZE = 10;
 		
 		/*Individual aa = new Individual(size);
 		System.out.println(aa);
@@ -31,9 +32,9 @@ public class Main {
 		//pop.sortByFitness();
 		//System.out.println(pop.selectParent());
 		
-		for (int i = 0; i < 100000000; i++){
+		for (int i = 0; i < 1000000; i++){
 			Population nextGen = new Population(POPULATION_SIZE);
-			if (i%1000 == 0) System.out.println("Gen " + i + " " + pop);
+			if (i%100 == 0) System.out.println("Gen " + i + " " + pop);
 			//pop.sortByFitness();
 			//Arrays.sort(pop.individuals, Individual.fitnessAscending);
 			pop.sortFitnessNew();
@@ -41,20 +42,13 @@ public class Main {
 			for (int j = 0; j < POPULATION_SIZE; j++){
 				nextGen.individuals[j] = pop.selectParent();
 
-				nextGen.individuals[j].mutate();
-				nextGen.individuals[j].mutate();
-				nextGen.individuals[j].mutate();
-				nextGen.individuals[j].mutate();
-				nextGen.individuals[j].mutate();
-				nextGen.individuals[j].mutate();
-				nextGen.individuals[j].mutate();
 
-				/*
+
 				int r = new Random().nextInt(POPULATION_SIZE); // between 0 and 4.
 				for (int a = 0; a < r; a++){
 					nextGen.individuals[j].mutate();
 				}
-				 */
+
 
 			}
 		}

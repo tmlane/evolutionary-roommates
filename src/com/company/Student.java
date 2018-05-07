@@ -9,9 +9,9 @@ public class Student {
 	// three fields
 	public String Name;
 	public String ID;
-	double[] answers = new double[4];
+	double[] answers;
 
-	public HashMap<String, Integer> Answers;
+	//public HashMap<String, Integer> Answers;
 
 	// the Student class has
 	// one constructor
@@ -24,6 +24,7 @@ public class Student {
 		/*
 		 * If no parameters are given generate a random student!
 		 */
+		answers = new double[4];
 		this.Name = "Tester Mctesty";
 		this.ID = "0000000";
 		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
@@ -32,7 +33,7 @@ public class Student {
 		hmap.put("Q2", rand.nextInt(5) + 1);
 		hmap.put("Q3", rand.nextInt(5) + 1);
 		hmap.put("Q4", rand.nextInt(5) + 1);
-		this.Answers = hmap;
+		//this.Answers = hmap;
 		this.answers[0] = hmap.get("Q1");
 		this.answers[1] = hmap.get("Q2");
 		this.answers[2] = hmap.get("Q3");
@@ -41,26 +42,12 @@ public class Student {
 
 	public Student(String[] dataArray)
 	{
-	this.Name = dataArray[0];
-	this.ID = dataArray[1];
-		HashMap<String, Integer> hmap = new HashMap<String, Integer>();
-	hmap.put("Q1",Integer.parseInt(dataArray[2]));
-	hmap.put("Q2",Integer.parseInt(dataArray[3]));
-	hmap.put("Q3",Integer.parseInt(dataArray[4]));
-	hmap.put("Q4",Integer.parseInt(dataArray[5]));
-	this.Answers = hmap;
-	this.answers[0] = hmap.get("Q1");
-	this.answers[1] = hmap.get("Q2");
-	this.answers[2] = hmap.get("Q3");
-	this.answers[3] = hmap.get("Q4");
+		answers = new double[dataArray.length];
+		this.Name = dataArray[0];
+		this.ID = dataArray[1];
 
-
+		for (int i = 0 ;i < dataArray.length; i++){
+			this.answers[i] = Integer.parseInt(dataArray[2]);
+		}
 	}
-
-	public void printInfo() {
-		System.out.println("Name: " + this.Name + "ID: " + this.ID);
-		System.out.println("Answers: " + this.Answers);
-
-	}
-
 }
