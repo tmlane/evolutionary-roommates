@@ -40,7 +40,7 @@ public class Population {
 			}
 		}*/
 		int r = new Random().nextInt(5); // between 0 and 4.
-		return individuals[r];
+		return individuals[0];
 
 		//throw new UnsupportedOperationException ("Looks like something went wrong with selecting the parent");
 	}
