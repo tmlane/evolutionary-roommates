@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.Random;
+import java.util.Arrays;
 import java.util.Comparator;
 
 /*
@@ -16,15 +17,12 @@ public class Individual {
 
 	public Individual(int roommateCount) {
 		pairings = new int[roommateCount];
-		for (int i = 0; i < pairings.length; i++) {
+		for (int i = 0; i < roommateCount; i++) {
 			pairings[i] = i;
 		}
 	}
 	public Individual(Individual old){
-		pairings = new int[old.pairings.length];
-		for(int i = 0; i < pairings.length; i++){
-			pairings[i] = old.pairings[i];
-		}
+		pairings = Arrays.copyOf(old.pairings, old.pairings.length);
 	}
 	
 	public double calculateTotalFitness(){
