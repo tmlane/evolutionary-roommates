@@ -10,9 +10,11 @@ public class Main {
 
 	static int POPULATION_SIZE = 30;
 	static String DATA_FILE = "src/com/company/realSampleData.csv";
-	static double MUTATION_PROBABILITY = .5;
-	static int NUM_GENERATIONS = 10000000;
+	static double MUTATION_PROBABILITY = 1.0/1200.0*3;
+	static int NUM_GENERATIONS = 50000000;
 	static int PRINT_SEPARATION = 100; // Print every ? generations
+	static int ELITISM_LEVEL = 1; // Select next gen from top ? individuals
+	
 
 	public static void main(String[] args) throws IOException {
 		try {
@@ -34,19 +36,22 @@ public class Main {
 		
 		for (int i = 0; i < NUM_GENERATIONS; i++){
 			Population nextGen = new Population(POPULATION_SIZE, false);
-
 			pop.sortFitnessNew();
 			if (i%PRINT_SEPARATION == 0) System.out.println("Gen " + i + " " + pop);
+			if(pop.individuals[pop.individuals.length-1].calculateTotalFitness() == 1.0){
+				System.out.println("Winner! " + i + " " + pop);
+				break;
+			}
 
-			boolean printDiffs = false;
+			/*boolean printDiffs = false;
 			if (i == 1000){
 				printDiffs = true;
 				for (int t = 0; t < pop.individuals.length; t++){
 					System.out.println(pop.individuals[t]);
 				}
-			}
+			}*/
 			for (int j = 0; j < POPULATION_SIZE; j++){
-				nextGen.individuals[j] = pop.selectParent();
+				nextGen.individuals[j] = new Individual(pop.selectParent());
 
 				int r = new Random().nextInt(number_of_students); // between 0 and number of students - 1
 				double before = nextGen.individuals[j].calculateTotalFitness();
@@ -54,8 +59,10 @@ public class Main {
 					nextGen.individuals[j].mutate();
 				}
 				double after = nextGen.individuals[j].calculateTotalFitness();
-				if (printDiffs) System.out.println(before + " " + after);
+				
+				//if (printDiffs) System.out.println(before + " " + after);
 			}
+			pop = nextGen;
 		}
 
 		System.out.println("Gen last " + pop);
