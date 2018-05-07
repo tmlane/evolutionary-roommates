@@ -12,15 +12,18 @@ import java.util.Comparator;
 
 public class Individual {
 	int[] pairings;
-	private final Student[] students = Main.students;
-	private int size;
+	final Student[] students = Main.students;
 
 	public Individual(int roommateCount) {
-		size = roommateCount;
-		pairings = new int[size];
-
-		for (int i = 0; i < size; i++) {
+		pairings = new int[roommateCount];
+		for (int i = 0; i < pairings.length; i++) {
 			pairings[i] = i;
+		}
+	}
+	public Individual(Individual old){
+		pairings = new int[old.pairings.length];
+		for(int i = 0; i < pairings.length; i++){
+			pairings[i] = old.pairings[i];
 		}
 	}
 	
@@ -29,7 +32,7 @@ public class Individual {
 		 * Returns the average fitness of all roommate pairings
 		 */
 		double total = 0;
-		for (int i =0; i < size; i += 2){
+		for (int i =0; i < pairings.length; i += 2){
 			Student roommate1 = students[pairings[i]];
 			Student roommate2 = students[pairings[i+1]];
 			double compatibility = calcRoommateCompatibility(roommate1, roommate2);
@@ -37,7 +40,7 @@ public class Individual {
 			//System.out.println("Compatability score of Pair " + (i/2) + " " + compatibility + "\n");
 		}
 		// number_of_students / 2 is the number of pairings
-		total = total / (size / 2);
+		total = total / (pairings.length / 2);
 		return total;
 	}
 	
@@ -64,8 +67,8 @@ public class Individual {
 	// mutation switches a two random people
 	public void mutate(){
 		if (Math.random() > 1-Main.MUTATION_PROBABILITY){
-			int spot1 = randomBetween(0, size - 1);
-			int spot2 = randomBetween(0, size - 1);
+			int spot1 = randomBetween(0, pairings.length - 1);
+			int spot2 = randomBetween(0, pairings.length - 1);
 	
 			int temp = pairings[spot1];
 			pairings[spot1] = pairings[spot2];
@@ -81,7 +84,7 @@ public class Individual {
 	public String toString(){
 		String result = "Total Fitness: " + String.format("%.2f", calculateTotalFitness());
 		/*result += "\tPairs: ";
-		for (int i = 0; i < size; i++){
+		for (int i = 0; i < pairings.length; i++){
 			result += pairings[i] + " ";
 		}*/
 		return result;
