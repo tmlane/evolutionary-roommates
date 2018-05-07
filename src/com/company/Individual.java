@@ -13,17 +13,14 @@ import java.util.Comparator;
 public class Individual {
 	int[] pairings;
 	private final Student[] students = Main.students;
-	int size;
+	private int size;
 
 	public Individual(int roommateCount) {
 		size = roommateCount;
-		pairings = new int[size]; //note to Trevor: becuase using single arrays instead of 2d arrays
+		pairings = new int[size];
+
 		for (int i = 0; i < size; i++) {
 			pairings[i] = i;
-		}
-		// Mutates to create the individual
-		for(int i =0;i<5;i++) {
-			mutate();
 		}
 	}
 	
@@ -39,7 +36,7 @@ public class Individual {
 			total += compatibility;
 			//System.out.println("Compatability score of Pair " + (i/2) + " " + compatibility + "\n");
 		}
-		// size / 2 is the number of pairings
+		// number_of_students / 2 is the number of pairings
 		total = total / (size / 2);
 		return total;
 	}
@@ -66,8 +63,7 @@ public class Individual {
 
 	// mutation switches a two random people
 	public void mutate(){
-		double mutationProbability = 1.0/2.0;
-		if (Math.random() > 1-mutationProbability){
+		if (Math.random() > 1-Main.MUTATION_PROBABILITY){
 			int spot1 = randomBetween(0, size - 1);
 			int spot2 = randomBetween(0, size - 1);
 	

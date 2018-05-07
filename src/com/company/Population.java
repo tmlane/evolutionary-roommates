@@ -1,5 +1,4 @@
 package com.company;
-import com.sun.deploy.util.ArrayUtil;
 
 import java.util.Arrays;
 import java.util.Random;
@@ -7,15 +6,13 @@ import java.util.Random;
 public class Population {
 	Individual[] individuals;
 
-	public Population(int individualCount) {
+	public Population(int individualCount, boolean randomPopulation) {
 		individuals = new Individual[individualCount];
-		for (int i = 0; i < individualCount; i++) {
-			individuals[i] = new Individual(Main.size);
-			//System.out.println(individuals[i]);
-			//System.out.println(individuals[i].calculateTotalFitness());
+		if (randomPopulation){
+			for (int i = 0; i < individualCount; i++) {
+				individuals[i] = new Individual(Main.number_of_students);
+			}
 		}
-		//sortByFitness(); // We don't want to sort by fitness until after mutation
-		//System.out.println(this);
 	}
 
 

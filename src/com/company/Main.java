@@ -1,14 +1,21 @@
 package com.company;
 import java.util.*;
-
-
 import java.io.*;
 
 public class Main {
-	public static int size;// = 20*2; // number of students in an individual
-	//public static final Student[] studentsRandom = createRandomStudents(size);
+	public static int number_of_students = 0; // number of students in an individual. zero until read from file
 	public static  Student[] students;
+
+	/// Configurations/////////////////////////
+
+	static int POPULATION_SIZE = 10;
+	static String DATA_FILE = "src/com/company/data.csv";
+	static double MUTATION_PROBABILITY = .5;
+	static int NUM_GENERATIONS = 10000000;
+	static int PRINT_SEPARATION = 10000; // Print every ? generations
+
 	public static void main(String[] args) throws IOException {
+
 
 		try {
 			 students = createStudents();
@@ -18,33 +25,28 @@ public class Main {
 			System.out.println(error);
 		}
 
-		int POPULATION_SIZE = 100;
 		
-		/*Individual aa = new Individual(size);
+		/*Individual aa = new Individual(number_of_students);
 		System.out.println(aa);
 		aa.mutate();
 		System.out.println(aa);
 		System.out.println(aa.calcRoommateCompatibility(students[0], students[1]));
 		*/
-		Population pop = new Population(POPULATION_SIZE);
+		Population pop = new Population(POPULATION_SIZE, true);
 		System.out.println(pop);
 		//pop.sortByFitness();
 		//System.out.println(pop.selectParent());
 		
-		for (int i = 0; i < 10000000; i++){
-			Population nextGen = new Population(POPULATION_SIZE);
+		for (int i = 0; i < NUM_GENERATIONS; i++){
+			Population nextGen = new Population(POPULATION_SIZE, false);
 
 			pop.sortFitnessNew();
-			if (i%10000 == 0) System.out.println("Gen " + i + " " + pop);
-			//pop.sortByFitness();
-			//Arrays.sort(pop.individuals, Individual.fitnessAscending);
+			if (i%PRINT_SEPARATION == 0) System.out.println("Gen " + i + " " + pop);
 
 			for (int j = 0; j < POPULATION_SIZE; j++){
 				nextGen.individuals[j] = pop.selectParent();
 
-
-
-				int r = new Random().nextInt(size); // between 0 and 4.
+				int r = new Random().nextInt(number_of_students); // between 0 and number of students - 1
 				//if (i%10000 == 0) System.out.print(", " + r);
 
 				for (int a = 0; a < r; a++){
@@ -56,34 +58,27 @@ public class Main {
 		System.out.println("Gen last " + pop);
 	}
 
-	public static Student[] createRandomStudents(int size) {
-		Student result[] = new Student[size];
-		for (int i = 0; i < size; i++) {
-			result[i] = new Student();
-		}
-		return result;
-	}
-
 	public static Student[] createStudents() throws IOException {
-		List<Student> list = new ArrayList<Student>();
+		List<Student> list = new ArrayList<>();
 
-
-		BufferedReader CSVFile = new BufferedReader(new FileReader("src/com/company/data.csv"));
+		BufferedReader CSVFile = new BufferedReader(new FileReader(DATA_FILE));
 		String dataRow = CSVFile.readLine();
-		int i = 0; //i = counter
+
 		while(dataRow != null)
 		{
 			String[] dataArray = dataRow.split(",");
 			//result[i] = new Student(dataArray);
 			list.add(new Student(dataArray));
-			i++;
+			Main.number_of_students++;
 			dataRow = CSVFile.readLine();
 		}
 		CSVFile.close();
-		Main.size = i;
-		if (Main.size % 2 > 0) throw new Error("please enter an even number of students");
-		Student result[] = new Student[Main.size];
-		for (int j = 0; j < Main.size; j++){
+
+		if (Main.number_of_students % 2 > 0) throw new Error("please enter an even number of students");
+
+		Student result[] = new Student[Main.number_of_students];
+
+		for (int j = 0; j < Main.number_of_students; j++){
 			result[j] = list.get(j);
 		}
 
