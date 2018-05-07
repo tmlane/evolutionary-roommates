@@ -36,8 +36,8 @@ public class Population {
 				return individuals[i];
 			}
 		}*/
-		int r = new Random().nextInt(5); // between 0 and 4.
-		return individuals[0];
+		int r = new Random().nextInt(Main.ELITISM_LEVEL); // between 0 and 4.
+		return individuals[individuals.length-1-r];
 
 		//throw new UnsupportedOperationException ("Looks like something went wrong with selecting the parent");
 	}
