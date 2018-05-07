@@ -3,15 +3,14 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
-	public static int number_of_students = 0; // number of students in an individual. zero until read from file
 	public static  Student[] students;
 
 	/// Configurations/////////////////////////
 
-	static int POPULATION_SIZE = 30;
+	static int POPULATION_SIZE = 100;
 	static String DATA_FILE = "src/com/company/realSampleData.csv";
 	static double MUTATION_PROBABILITY = 1.0/1200.0*3;
-	static int NUM_GENERATIONS = 50000000;
+	static int NUM_GENERATIONS = 500000;
 	static int PRINT_SEPARATION = 100; // Print every ? generations
 	static int ELITISM_LEVEL = 1; // Select next gen from top ? individuals
 	
@@ -53,12 +52,12 @@ public class Main {
 			for (int j = 0; j < POPULATION_SIZE; j++){
 				nextGen.individuals[j] = new Individual(pop.selectParent());
 
-				int r = new Random().nextInt(number_of_students); // between 0 and number of students - 1
-				double before = nextGen.individuals[j].calculateTotalFitness();
+				int r = new Random().nextInt(students.length); // between 0 and number of students - 1
+				//double before = nextGen.individuals[j].calculateTotalFitness();
 				for (int a = 0; a < r; a++){
 					nextGen.individuals[j].mutate();
 				}
-				double after = nextGen.individuals[j].calculateTotalFitness();
+				//double after = nextGen.individuals[j].calculateTotalFitness();
 				
 				//if (printDiffs) System.out.println(before + " " + after);
 			}
@@ -69,25 +68,26 @@ public class Main {
 	}
 
 	public static Student[] createStudents() throws IOException {
+		int number_of_students = 0;
 		List<Student> list = new ArrayList<>();
 
 		BufferedReader CSVFile = new BufferedReader(new FileReader(DATA_FILE));
 		String dataRow = CSVFile.readLine();
 
-		while(dataRow != null)
-		{
-			Main.number_of_students++;
+		while (dataRow != null) {
+			number_of_students++;
 			String[] dataArray = dataRow.split(",");
 			list.add(new Student(dataArray));
 			dataRow = CSVFile.readLine();
 		}
 		CSVFile.close();
 
-		if (Main.number_of_students % 2 > 0) throw new Error("please enter an even number of students");
+		if (number_of_students % 2 > 0)
+			throw new Error("please enter an even number of students");
 
-		Student result[] = new Student[Main.number_of_students];
+		Student result[] = new Student[number_of_students];
 
-		for (int j = 0; j < Main.number_of_students; j++){
+		for (int j = 0; j < number_of_students; j++) {
 			result[j] = list.get(j);
 		}
 

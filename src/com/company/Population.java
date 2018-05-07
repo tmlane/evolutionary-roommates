@@ -10,7 +10,7 @@ public class Population {
 		individuals = new Individual[individualCount];
 		if (randomPopulation){
 			for (int i = 0; i < individualCount; i++) {
-				individuals[i] = new Individual(Main.number_of_students);
+				individuals[i] = new Individual(Main.students.length);
 			}
 		}
 	}
