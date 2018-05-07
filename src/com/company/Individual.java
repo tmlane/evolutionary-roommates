@@ -80,10 +80,10 @@ public class Individual {
 	
 	public String toString(){
 		String result = "Total Fitness: " + String.format("%.2f", calculateTotalFitness());
-		result += "\tPairs: ";
+		/*result += "\tPairs: ";
 		for (int i = 0; i < size; i++){
 			result += pairings[i] + " ";
-		}
+		}*/
 		return result;
 	}
 

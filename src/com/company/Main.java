@@ -8,23 +8,18 @@ public class Main {
 
 	/// Configurations/////////////////////////
 
-	static int POPULATION_SIZE = 10;
-	static String DATA_FILE = "src/com/company/data.csv";
+	static int POPULATION_SIZE = 30;
+	static String DATA_FILE = "src/com/company/realSampleData.csv";
 	static double MUTATION_PROBABILITY = .5;
 	static int NUM_GENERATIONS = 10000000;
-	static int PRINT_SEPARATION = 10000; // Print every ? generations
+	static int PRINT_SEPARATION = 100; // Print every ? generations
 
 	public static void main(String[] args) throws IOException {
-
-
 		try {
-			 students = createStudents();
-		}
-		catch (IOException error)
-		{
+			students = createStudents();
+		} catch (IOException error) {
 			System.out.println(error);
 		}
-
 		
 		/*Individual aa = new Individual(number_of_students);
 		System.out.println(aa);
@@ -43,15 +38,23 @@ public class Main {
 			pop.sortFitnessNew();
 			if (i%PRINT_SEPARATION == 0) System.out.println("Gen " + i + " " + pop);
 
+			boolean printDiffs = false;
+			if (i == 1000){
+				printDiffs = true;
+				for (int t = 0; t < pop.individuals.length; t++){
+					System.out.println(pop.individuals[t]);
+				}
+			}
 			for (int j = 0; j < POPULATION_SIZE; j++){
 				nextGen.individuals[j] = pop.selectParent();
 
 				int r = new Random().nextInt(number_of_students); // between 0 and number of students - 1
-				//if (i%10000 == 0) System.out.print(", " + r);
-
+				double before = nextGen.individuals[j].calculateTotalFitness();
 				for (int a = 0; a < r; a++){
 					nextGen.individuals[j].mutate();
 				}
+				double after = nextGen.individuals[j].calculateTotalFitness();
+				if (printDiffs) System.out.println(before + " " + after);
 			}
 		}
 
@@ -66,10 +69,9 @@ public class Main {
 
 		while(dataRow != null)
 		{
-			String[] dataArray = dataRow.split(",");
-			//result[i] = new Student(dataArray);
-			list.add(new Student(dataArray));
 			Main.number_of_students++;
+			String[] dataArray = dataRow.split(",");
+			list.add(new Student(dataArray));
 			dataRow = CSVFile.readLine();
 		}
 		CSVFile.close();

@@ -72,30 +72,6 @@ public class Population {
 		Arrays.sort(individuals, Individual.fitnessAscending);
 	}
 
-	//create method to sort individuals by fitness
-	public void sortByFitness()
-	{
-		boolean swapped = true;
-		int j = 0;
-		Individual tmp;
-		while (swapped)
-		{
-			swapped = false;
-			j++;
-			for(int i = 0; i < individuals.length - j; i++)
-			{
-				if(individuals[i].calculateTotalFitness() < individuals[i+1].calculateTotalFitness())
-				{
-					tmp = individuals[i];
-					individuals[i] = individuals[i+1];
-					individuals[i+1] = tmp;
-					swapped = true;
-				}
-			}
-		}
-
-	}
-
 	public double linearRankScore(int individualIndex, double scale){
 // If we don't already have a rank sorted array then make one
 
