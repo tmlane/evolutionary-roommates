@@ -24,6 +24,8 @@ public class GeneticAlgoRun implements Runnable{
 
 		for (int i = 0; i < NUM_GENERATIONS; i++) {
 			pop.sortFitnessNew();
+
+			if (i%1 == 0) System.out.println(i + "\t" + pop);
 			if (pop.individuals[pop.individuals.length - 1].calculateTotalFitness() == 1.0) {
 				System.out.println("Winner! " + i + " " + pop);
 				break;
@@ -31,7 +33,7 @@ public class GeneticAlgoRun implements Runnable{
 			pop = createNextGen(pop);
 		}
 
-		System.out.println("Gen last \t" + pop);
+		//System.out.println("Gen last " + pop);
 
 	}
 

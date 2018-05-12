@@ -59,7 +59,7 @@ public class Population {
 		for (int i = 0; i < individuals.length; i++) {
 		//	answer += individuals[i] + "\n";
 		}
-		answer += "Average Fitness: \t" + calculateAverageFitness();
+		answer += "" + calculateAverageFitness();
 		answer += "\t" + individuals[individuals.length-1].calculateTotalFitness();
 		return answer;
 	}

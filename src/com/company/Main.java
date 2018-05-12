@@ -10,7 +10,7 @@ public class Main {
 
 	static int POPULATION_SIZE = 30;
 	static String DATA_FILE = "src/com/company/realSampleData.csv";
-	static double MUTATION_PROBABILITY = 1.0/1200.0*3;
+	static double MUTATION_PROBABILITY = 1.0/600.0*3;
 	static int NUM_GENERATIONS = 500;
 	static int PRINT_SEPARATION = 100; // Print every ? generations
 	static int ELITISM_LEVEL = 1; // Select next gen from top ? individuals
@@ -26,18 +26,16 @@ public class Main {
     
 		ExecutorService executor = Executors.newFixedThreadPool(4);
 
-		for (int i = 0; i < 10; i++){
+		for (int i = 0; i < 20; i++){
 			GeneticAlgoRun a = new GeneticAlgoRun(POPULATION_SIZE, DATA_FILE, MUTATION_PROBABILITY, NUM_GENERATIONS, ELITISM_LEVEL);
-			executor.submit(a);
+			a.run();
+			//executor.submit(a);
 		}
 
 		// Need to figure out a way to figure out when all the executors are finished
 		// https://www.programcreek.com/java-api-examples/?class=java.util.concurrent.Executors&method=newWorkStealingPool
 		
-		System.out.println("hi");
-
-		long estimatedTime = System.nanoTime() - startTime;
-		System.out.println(estimatedTime);
+	
 		
 
 		
