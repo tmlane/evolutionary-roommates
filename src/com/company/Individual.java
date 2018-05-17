@@ -14,15 +14,18 @@ import java.util.Comparator;
 public class Individual {
 	int[] pairings;
 	final Student[] students = Main.students;
+	double MUTATION_PROBABILITY;
 
-	public Individual(int roommateCount) {
+	public Individual(int roommateCount, double mutationProbability) {
+		this.MUTATION_PROBABILITY = mutationProbability;
 		pairings = new int[roommateCount];
 		for (int i = 0; i < roommateCount; i++) {
 			pairings[i] = i;
 		}
 	}
-	public Individual(Individual old){
+	public Individual(Individual old, double mutationProbability){
 		pairings = Arrays.copyOf(old.pairings, old.pairings.length);
+		this.MUTATION_PROBABILITY = mutationProbability;
 	}
 	
 	public double calculateTotalFitness(){
@@ -64,7 +67,7 @@ public class Individual {
 
 	// mutation switches a two random people
 	public void mutate(){
-		if (Math.random() > 1-Main.MUTATION_PROBABILITY){
+		if (Math.random() > 1-this.MUTATION_PROBABILITY){
 			int spot1 = randomBetween(0, pairings.length - 1);
 			int spot2 = randomBetween(0, pairings.length - 1);
 	

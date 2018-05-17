@@ -20,12 +20,12 @@ public class GeneticAlgoRun implements Runnable{
 
 	public void runGenerations() {
 		// Create the first population
-		Population pop = new Population(POPULATION_SIZE, true);
+		Population pop = new Population(POPULATION_SIZE, MUTATION_PROBABILITY, true);
 
 		for (int i = 0; i < NUM_GENERATIONS; i++) {
 			pop.sortFitnessNew();
 
-			if (i%1 == 0) System.out.println(i + "\t" + pop);
+			if (i == 499) System.out.println(i + "\t" + pop);
 			if (pop.individuals[pop.individuals.length - 1].calculateTotalFitness() == 1.0) {
 				System.out.println("Winner! " + i + " " + pop);
 				break;
@@ -42,9 +42,9 @@ public class GeneticAlgoRun implements Runnable{
 	}
 	
 	private Population createNextGen(Population oldGeneration){
-		Population nextGen = new Population(POPULATION_SIZE, false);
+		Population nextGen = new Population(POPULATION_SIZE, this.MUTATION_PROBABILITY, false);
 		for (int j = 0; j < POPULATION_SIZE; j++){
-			nextGen.individuals[j] = new Individual(oldGeneration.selectParent());
+			nextGen.individuals[j] = new Individual(oldGeneration.selectParent(), this.MUTATION_PROBABILITY);
 			int r = new Random().nextInt(Main.students.length); // between 0 and number of students - 1
 			mutatexTimes(nextGen.individuals[j], r);
 		}

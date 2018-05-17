@@ -5,12 +5,14 @@ import java.util.Random;
 
 public class Population {
 	Individual[] individuals;
+	double MUTATION_PROBABILITY;
 
-	public Population(int individualCount, boolean randomPopulation) {
+	public Population(int individualCount, double MUTATION_PROBABILITY, boolean randomPopulation) {
+		this.MUTATION_PROBABILITY = MUTATION_PROBABILITY;
 		individuals = new Individual[individualCount];
 		if (randomPopulation){
 			for (int i = 0; i < individualCount; i++) {
-				individuals[i] = new Individual(Main.students.length);
+				individuals[i] = new Individual(Main.students.length, this.MUTATION_PROBABILITY);
 			}
 		}
 	}
@@ -59,6 +61,7 @@ public class Population {
 		for (int i = 0; i < individuals.length; i++) {
 		//	answer += individuals[i] + "\n";
 		}
+		answer += this.MUTATION_PROBABILITY + "\t";
 		answer += "" + calculateAverageFitness();
 		answer += "\t" + individuals[individuals.length-1].calculateTotalFitness();
 		return answer;
